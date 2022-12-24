@@ -7,6 +7,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class PizzaHomeComponent implements OnInit {
   toopings: any[] = [];
+  offer1: string = ''
+  offer2: string = '';
+  offer3: string = '';
+
   totalpriceSmall: number = 0;
   totalpriceMedium: number = 0;
   totalpriceLarg: number = 0;
@@ -15,7 +19,7 @@ export class PizzaHomeComponent implements OnInit {
   ngOnInit() {
     //{ name: 'Tomatoes($1.00)', cost: 1, small: false, medium: false, larg: false, xlarg: false },
     this.toopings = [
-      { name: 'Tomatoes($1.00)', cost: 1, isVeggy: true },
+      { name: 'Tomatoes($1.00)', cost: 1, isVeggy: true ,offerName:''},
       { name: 'Onions($0.50)', cost: 0.5, isVeggy: true },
       { name: 'Bell pepper($1.00)', cost: 1, isVeggy: true },
       { name: 'Mushrooms($1.20)', cost: 1.20, isVeggy: true },
@@ -30,6 +34,8 @@ export class PizzaHomeComponent implements OnInit {
       element.larg = false;
       element.xlarg = false;
     });
+
+
   }
 
   calcCountTopping(toppingname: string) {
@@ -46,6 +52,7 @@ export class PizzaHomeComponent implements OnInit {
 
   calculateTotalSmall() {
     this.totalpriceSmall = 0;
+    this.offer1,this.offer2,this.offer3 = '';
     this.toopings.filter((elm: any) => elm.small).forEach((elm: any) => {
       this.totalpriceSmall += elm.cost;
     });
@@ -54,22 +61,30 @@ export class PizzaHomeComponent implements OnInit {
   }
 
   calculateTotalMedium() {
+
     this.totalpriceMedium = 0;
+    this.offer1='';
+    this.offer2='';
+    this.offer3 = '';
     let count = 0;
     this.toopings.forEach((elm: any) => {
       if (elm.medium) {
         this.totalpriceMedium += elm.cost;
-        count++;
+        count ++;
       }
     });
     if (this.totalpriceMedium)
       this.totalpriceMedium += 7;
-    if (count == 2)
+    if (count == 2){
+      this.offer1 = 'offer1';
       this.totalpriceMedium = 5;
-    if (count == 4)
-      this.totalpriceMedium = 9;
+      }
+    if (count == 4){
+      this.offer2 = 'offer2';
+      this.totalpriceMedium = 9;}
   }
   calculateTotalLarg() {
+    this.offer1,this.offer2,this.offer3 = '';
     this.totalpriceLarg = 0;
     let count = 0;
     this.toopings.forEach((elm: any) => {
@@ -81,11 +96,14 @@ export class PizzaHomeComponent implements OnInit {
     });
     if (this.totalpriceLarg){
       this.totalpriceLarg += 8;
-      if (count == 4)
-        this.totalpriceLarg = this.totalpriceLarg/2;
+      if (count == 4){
+      this.offer3  = 'offer3';
+      this.totalpriceLarg = this.totalpriceLarg/2;
+      }
     }
   }
   calculateTotalXlarg() {
+    this.offer1,this.offer2,this.offer3 = '';
     this.totalpriceXlarg = 0;
 
     this.toopings.forEach((elm: any) => {
@@ -94,7 +112,7 @@ export class PizzaHomeComponent implements OnInit {
     });
     if (this.totalpriceXlarg)
       this.totalpriceXlarg += 9;
-  }  
+  }
 
 
 }
