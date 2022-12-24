@@ -1,0 +1,66 @@
+<div>
+    <table   style="width: 100%">
+
+        <tr>
+            <th rowspan="2">Toppings</th>
+            <th colspan="4">Pizza Size</th>
+        </tr>
+
+        <tr>
+            <th>Small($5)</th>
+            <th>Medium($7)</th>
+            <th>Larg($8)</th>
+            <th>Xtra Larg($9)</th>
+        </tr>
+        <tr>
+            <th style="text-align:left" colspan="5"> veg Toppings </th>
+        </tr>
+        <tbody *ngFor="let elm of toopings" >
+        <tr *ngIf="elm.isVeggy"  >
+            <!-- <div *ngIf="true" > -->
+            <td>{{elm.name}} </td>
+            <td> <input type="checkbox" [(ngModel)]="elm.small" (ngModelChange)="calculateTotalSmall()" /></td>
+            <td><input type="checkbox" [(ngModel)]="elm.medium" (ngModelChange)="calculateTotalMedium()"/></td>
+            <td> <input type="checkbox" [(ngModel)]="elm.larg" (ngModelChange)="calculateTotalLarg()"/></td>
+            <td> <input type="checkbox" [(ngModel)]="elm.xlarg" (ngModelChange)="calculateTotalXlarg()"/></td>
+            <!-- </div> -->
+        </tr>
+        </tbody>
+        <tr>
+            <th style="text-align:left" colspan="5"> Nonveg Toppings </th>
+        </tr>
+        <tbody *ngFor="let elm of toopings" >
+            <tr  *ngIf="!elm.isVeggy">
+
+                <td>{{elm.name}}</td>
+                <td> <input type="checkbox" [(ngModel)]="elm.small" (ngModelChange)="calculateTotalSmall()" /></td>
+                <td><input type="checkbox" [(ngModel)]="elm.medium" (ngModelChange)="calculateTotalMedium()"/></td>
+                <td> <input type="checkbox" [(ngModel)]="elm.larg" (ngModelChange)="calculateTotalLarg()"/></td>
+                <td> <input type="checkbox" [(ngModel)]="elm.xlarg" (ngModelChange)="calculateTotalXlarg()"/></td>
+
+            </tr>
+        </tbody>
+        <tr>
+            <th style="text-align:left" colspan="5"> Total </th>
+
+        </tr>
+
+        <tr>
+
+            <td>offer</td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+
+            <td>Total</td>
+            <td> {{totalpriceSmall}}</td>
+            <td>{{totalpriceMedium}} </td>
+            <td> {{totalpriceLarg}}</td>
+            <td> {{totalpriceXlarg}}</td>
+        </tr>
+
+    </table>
+</div>
